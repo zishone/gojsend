@@ -1,2 +1,2 @@
 # gojsend
-A JSend Builder and http.ResponseWriter Wrapper for Go.
+A JSend Builder and http.ResponseWriter Extender for Go.
