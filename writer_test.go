@@ -33,6 +33,9 @@ func TestWriterSuccess(t *testing.T) {
 	if err != nil {
 		t.Errorf("WriterSuccess\n\thave: %v\n\twant: %v", err, nil)
 	}
+	if w.Result().StatusCode != gojsend.StatusCodeSuccess {
+		t.Errorf("WriterSuccess\n\thave: %v\n\twant: %v", w.Result().StatusCode, gojsend.StatusCodeSuccess)
+	}
 	body := make(map[string]interface{})
 	err = json.NewDecoder(w.Result().Body).Decode(&body)
 	if err != nil {
@@ -58,6 +61,9 @@ func TestWriterFail(t *testing.T) {
 	if err != nil {
 		t.Errorf("WriterFail\n\thave: %v\n\twant: %v", err, nil)
 	}
+	if w.Result().StatusCode != gojsend.StatusCodeFail {
+		t.Errorf("WriterFail\n\thave: %v\n\twant: %v", w.Result().StatusCode, gojsend.StatusCodeFail)
+	}
 	body := make(map[string]interface{})
 	err = json.NewDecoder(w.Result().Body).Decode(&body)
 	if err != nil {
@@ -81,6 +87,9 @@ func TestWriterError(t *testing.T) {
 	_, err := gojsend.NewWriter(w).Error(message).Send()
 	if err != nil {
 		t.Errorf("WriterError\n\thave: %v\n\twant: %v", err, nil)
+	}
+	if w.Result().StatusCode != gojsend.StatusCodeError {
+		t.Errorf("WriterError\n\thave: %v\n\twant: %v", w.Result().StatusCode, gojsend.StatusCodeError)
 	}
 	body := make(map[string]interface{})
 	err = json.NewDecoder(w.Result().Body).Decode(&body)
