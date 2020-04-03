@@ -1,7 +1,5 @@
 package gojsend
 
-import "encoding/json"
-
 // JSendBuilder : interface for builder of JSend object
 type JSendBuilder interface {
 	Success(interface{}) JSendBuilder
@@ -20,14 +18,6 @@ type JSendBuilder interface {
 type JSendBuilderBuffer struct {
 	jsonEncoder JSONEncoder
 	response    map[string]interface{}
-}
-
-// NewBuilder : returns JSendBuilder
-func NewBuilder() JSendBuilder {
-	return &JSendBuilderBuffer{
-		jsonEncoder: json.Marshal,
-		response:    make(map[string]interface{}),
-	}
 }
 
 // Set : sets custom key in the JSendBuilder

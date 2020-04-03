@@ -7,15 +7,6 @@ import (
 	"github.com/zishone/gojsend"
 )
 
-func TestNewBuilder(t *testing.T) {
-	j := gojsend.NewBuilder()
-
-	j, ok := j.(gojsend.JSendBuilder)
-	if !ok {
-		t.Errorf("NewBuilder\n\thave: %T\n\twant: %v", j, "JSendBuilder")
-	}
-}
-
 func TestBuilderSet(t *testing.T) {
 	key := "foo"
 	value := "bar"

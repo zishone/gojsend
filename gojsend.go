@@ -1,4 +1,10 @@
+// Package gojsend is a JSend Builder and Response Writer for Go.
 package gojsend
+
+import (
+	"encoding/json"
+	"net/http"
+)
 
 // JSONEncoder : JSON encoder function
 type JSONEncoder func(v interface{}) ([]byte, error)
@@ -31,3 +37,20 @@ const (
 	// FieldCode : JSend code field
 	FieldCode = "code"
 )
+
+// NewBuilder : returns JSendBuilder
+func NewBuilder() JSendBuilder {
+	return &JSendBuilderBuffer{
+		jsonEncoder: json.Marshal,
+		response:    make(map[string]interface{}),
+	}
+}
+
+// NewWriter : returns JSendWriter which extends http.ResponseWriter with gojsend functions
+func NewWriter(w http.ResponseWriter) JSendWriter {
+	return &JSendWriterBuffer{
+		builder:        NewBuilder(),
+		statusCode:     StatusCodeSuccess,
+		responseWriter: w,
+	}
+}
