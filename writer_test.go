@@ -2,6 +2,7 @@ package gojsend_test
 
 import (
 	"encoding/json"
+	"net/http"
 	"net/http/httptest"
 	"testing"
 
@@ -33,8 +34,8 @@ func TestWriterSuccess(t *testing.T) {
 	if err != nil {
 		t.Errorf("WriterSuccess\n\thave: %v\n\twant: %v", err, nil)
 	}
-	if w.Result().StatusCode != gojsend.StatusCodeSuccess {
-		t.Errorf("WriterSuccess\n\thave: %v\n\twant: %v", w.Result().StatusCode, gojsend.StatusCodeSuccess)
+	if w.Result().StatusCode != http.StatusOK {
+		t.Errorf("WriterSuccess\n\thave: %v\n\twant: %v", w.Result().StatusCode, http.StatusOK)
 	}
 	body := make(map[string]interface{})
 	err = json.NewDecoder(w.Result().Body).Decode(&body)
@@ -61,8 +62,8 @@ func TestWriterFail(t *testing.T) {
 	if err != nil {
 		t.Errorf("WriterFail\n\thave: %v\n\twant: %v", err, nil)
 	}
-	if w.Result().StatusCode != gojsend.StatusCodeFail {
-		t.Errorf("WriterFail\n\thave: %v\n\twant: %v", w.Result().StatusCode, gojsend.StatusCodeFail)
+	if w.Result().StatusCode != http.StatusBadRequest {
+		t.Errorf("WriterFail\n\thave: %v\n\twant: %v", w.Result().StatusCode, http.StatusBadRequest)
 	}
 	body := make(map[string]interface{})
 	err = json.NewDecoder(w.Result().Body).Decode(&body)
@@ -88,8 +89,8 @@ func TestWriterError(t *testing.T) {
 	if err != nil {
 		t.Errorf("WriterError\n\thave: %v\n\twant: %v", err, nil)
 	}
-	if w.Result().StatusCode != gojsend.StatusCodeError {
-		t.Errorf("WriterError\n\thave: %v\n\twant: %v", w.Result().StatusCode, gojsend.StatusCodeError)
+	if w.Result().StatusCode != http.StatusInternalServerError {
+		t.Errorf("WriterError\n\thave: %v\n\twant: %v", w.Result().StatusCode, http.StatusInternalServerError)
 	}
 	body := make(map[string]interface{})
 	err = json.NewDecoder(w.Result().Body).Decode(&body)

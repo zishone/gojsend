@@ -10,15 +10,6 @@ import (
 type JSONEncoder func(v interface{}) ([]byte, error)
 
 const (
-	// StatusCodeSuccess : HTTP success status code
-	StatusCodeSuccess = 200
-	// StatusCodeFail : HTTP fail status code
-	StatusCodeFail = 400
-	// StatusCodeError : HTTP error status code
-	StatusCodeError = 500
-)
-
-const (
 	// StatusSuccess : JSend success status
 	StatusSuccess = "success"
 	// StatusFail : JSend fail status
@@ -50,7 +41,7 @@ func NewBuilder() JSendBuilder {
 func NewWriter(w http.ResponseWriter) JSendWriter {
 	return &JSendWriterBuffer{
 		builder:        NewBuilder(),
-		statusCode:     StatusCodeSuccess,
+		statusCode:     http.StatusOK,
 		responseWriter: w,
 	}
 }

@@ -36,21 +36,21 @@ func (j *JSendWriterBuffer) Set(key string, value interface{}) JSendWriter {
 
 // Success : sets status in the JSendWriterBuffer to success
 func (j *JSendWriterBuffer) Success(data interface{}) JSendWriter {
-	j.statusCode = StatusCodeSuccess
+	j.statusCode = http.StatusOK
 	j.builder.Success(data)
 	return j
 }
 
 // Fail : sets status in the JSendWriterBuffer to fail
 func (j *JSendWriterBuffer) Fail(data interface{}) JSendWriter {
-	j.statusCode = StatusCodeFail
+	j.statusCode = http.StatusBadRequest
 	j.builder.Fail(data)
 	return j
 }
 
 // Error : sets status in the JSendWriterBuffer to error
 func (j *JSendWriterBuffer) Error(message string) JSendWriter {
-	j.statusCode = StatusCodeError
+	j.statusCode = http.StatusInternalServerError
 	j.builder.Error(message)
 	return j
 }
