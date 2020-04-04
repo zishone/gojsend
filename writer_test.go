@@ -160,10 +160,21 @@ func TestWriterJSONEncoder(t *testing.T) {
 func TestWriterBuilder(t *testing.T) {
 	w := httptest.NewRecorder()
 	j := gojsend.NewWriter(w).Builder()
-
 	j, ok := j.(gojsend.JSendBuilder)
 	if !ok {
 		t.Errorf("WriterBuilder\n\thave: %T\n\twant: %v", j, "JSendBuilder")
+	}
+}
+
+func TestWriterStatusCode(t *testing.T) {
+	statusCode := 200
+	w := httptest.NewRecorder()
+	_, err := gojsend.NewWriter(w).StatusCode(statusCode).Send()
+	if err != nil {
+		t.Errorf("WriterStatusCode\n\thave: %v\n\twant: %v", err, nil)
+	}
+	if w.Result().StatusCode != http.StatusOK {
+		t.Errorf("WriterStatusCode\n\thave: %v\n\twant: %v", w.Result().StatusCode, http.StatusOK)
 	}
 }
 

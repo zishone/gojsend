@@ -19,6 +19,7 @@ type JSendWriter interface {
 	JSONEncoder(JSONEncoder) JSendWriter
 	Builder() JSendBuilder
 
+	StatusCode(int) JSendWriter
 	Send() (int, error)
 }
 
@@ -37,21 +38,21 @@ func (j *JSendWriterBuffer) Set(key string, value interface{}) JSendWriter {
 
 // Success : sets status in the JSendWriterBuffer to success
 func (j *JSendWriterBuffer) Success(data interface{}) JSendWriter {
-	j.statusCode = http.StatusOK
+	j.StatusCode(http.StatusOK)
 	j.builder.Success(data)
 	return j
 }
 
 // Fail : sets status in the JSendWriterBuffer to fail
 func (j *JSendWriterBuffer) Fail(data interface{}) JSendWriter {
-	j.statusCode = http.StatusBadRequest
+	j.StatusCode(http.StatusBadRequest)
 	j.builder.Fail(data)
 	return j
 }
 
 // Error : sets status in the JSendWriterBuffer to error
 func (j *JSendWriterBuffer) Error(message string) JSendWriter {
-	j.statusCode = http.StatusInternalServerError
+	j.StatusCode(http.StatusInternalServerError)
 	j.builder.Error(message)
 	return j
 }
@@ -74,6 +75,12 @@ func (j *JSendWriterBuffer) JSONEncoder(jsonEncoder JSONEncoder) JSendWriter {
 	return j
 }
 
+// StatusCode : sets HTTP status code in the JSendWriterBuffer
+func (j *JSendWriterBuffer) StatusCode(statusCode int) JSendWriter {
+	j.statusCode = statusCode
+	return j
+}
+
 // Builder : returns the JSend builder in the JSendWriterBuffer
 func (j *JSendWriterBuffer) Builder() JSendBuilder {
 	return j.builder
@@ -81,7 +88,7 @@ func (j *JSendWriterBuffer) Builder() JSendBuilder {
 
 // Send : encodes and sends response
 func (j *JSendWriterBuffer) Send() (int, error) {
-	bs, err := j.builder.Build()
+	bs, err := j.Builder().Build()
 	if err != nil {
 		return 0, err
 	}
