@@ -2,6 +2,7 @@ package gojsend_test
 
 import (
 	"encoding/json"
+	"reflect"
 	"testing"
 
 	"github.com/zishone/gojsend"
@@ -137,6 +138,13 @@ func TestBuilderJSONEncoder(t *testing.T) {
 	err = json.Unmarshal(j, &body)
 	if err != nil {
 		t.Errorf("BuilderJSONEncoder\n\thave: %v\n\twant: %v", err, nil)
+	}
+}
+
+func TestBuilderResponse(t *testing.T) {
+	j := gojsend.NewBuilder().Response()
+	if reflect.TypeOf(j).Kind() != reflect.Map {
+		t.Errorf("BuilderResponse\n\thave: %v\n\twant: %v", reflect.TypeOf(j).Kind(), reflect.Map)
 	}
 }
 

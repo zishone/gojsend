@@ -12,6 +12,7 @@ type JSendBuilder interface {
 
 	JSONEncoder(JSONEncoder) JSendBuilder
 	Build() ([]byte, error)
+	Response() map[string]interface{}
 }
 
 // JSendBuilderBuffer : JSendBuilder parameters buffer
@@ -63,7 +64,12 @@ func (j *JSendBuilderBuffer) JSONEncoder(jsonEncoder JSONEncoder) JSendBuilder {
 	return j
 }
 
-// Build : encodes and returns JSend response []byte
+// Response : returns the JSend response as map[string]interface{}
+func (j *JSendBuilderBuffer) Response() map[string]interface{} {
+	return j.response
+}
+
+// Build : encodes and returns JSend response as []byte
 func (j *JSendBuilderBuffer) Build() ([]byte, error) {
 	return j.jsonEncoder(j.response)
 }
