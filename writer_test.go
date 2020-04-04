@@ -157,6 +157,16 @@ func TestWriterJSONEncoder(t *testing.T) {
 	}
 }
 
+func TestWriterBuilder(t *testing.T) {
+	w := httptest.NewRecorder()
+	j := gojsend.NewWriter(w).Builder()
+
+	j, ok := j.(gojsend.JSendBuilder)
+	if !ok {
+		t.Errorf("WriterBuilder\n\thave: %T\n\twant: %v", j, "JSendBuilder")
+	}
+}
+
 func TestWriterSend(t *testing.T) {
 	w := httptest.NewRecorder()
 	_, err := gojsend.NewWriter(w).Send()

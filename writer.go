@@ -17,6 +17,7 @@ type JSendWriter interface {
 	Set(string, interface{}) JSendWriter
 
 	JSONEncoder(JSONEncoder) JSendWriter
+	Builder() JSendBuilder
 
 	Send() (int, error)
 }
@@ -71,6 +72,11 @@ func (j *JSendWriterBuffer) Code(code int) JSendWriter {
 func (j *JSendWriterBuffer) JSONEncoder(jsonEncoder JSONEncoder) JSendWriter {
 	j.builder.JSONEncoder(jsonEncoder)
 	return j
+}
+
+// Builder : returns the JSend builder in the JSendWriterBuffer
+func (j *JSendWriterBuffer) Builder() JSendBuilder {
+	return j.builder
 }
 
 // Send : encodes and sends response
