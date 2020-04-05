@@ -58,7 +58,8 @@ func (j *JSendBuilderBuffer) Code(code int) JSendBuilder {
 	return j.Set(FieldCode, code)
 }
 
-// JSONEncoder : sets JSON encoder function to be used in the JSendBuilder
+// JSONEncoder : sets JSON encoder function to be used in the
+// JSendBuilder
 func (j *JSendBuilderBuffer) JSONEncoder(jsonEncoder JSONEncoder) JSendBuilder {
 	j.jsonEncoder = jsonEncoder
 	return j
