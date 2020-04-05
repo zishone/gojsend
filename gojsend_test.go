@@ -24,3 +24,11 @@ func TestNewWriter(t *testing.T) {
 		t.Errorf("NewWriter\n\thave: %T\n\twant: %v", j, "JSendWriter")
 	}
 }
+
+func TestNewDecorator(t *testing.T) {
+	j := gojsend.NewDecorator()
+	j, ok := j.(gojsend.JSendDecorator)
+	if !ok {
+		t.Errorf("NewDecorator\n\thave: %T\n\twant: %v", j, "JSendDecorator")
+	}
+}

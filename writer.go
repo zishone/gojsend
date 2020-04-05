@@ -69,7 +69,8 @@ func (j *JSendWriterBuffer) Code(code int) JSendWriter {
 	return j
 }
 
-// JSONEncoder : sets JSON encoder function to be used in the JSendWriterBuffer
+// JSONEncoder : sets JSON encoder function to be used in the
+// JSendWriterBuffer
 func (j *JSendWriterBuffer) JSONEncoder(jsonEncoder JSONEncoder) JSendWriter {
 	j.builder.JSONEncoder(jsonEncoder)
 	return j
