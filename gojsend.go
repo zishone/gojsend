@@ -7,7 +7,7 @@
 // Provides a convinient way for building JSend
 // responses.
 //
-// Examples:
+// Usage:
 //	// Success
 //	builder := gojsend.NewBuilder().
 //		// JSONEncoder(json.Marshal).	// Use to overwrite default json encoder
@@ -41,7 +41,7 @@
 // builder functions and a Send function to pass the built JSend
 // response to http.ResponseWriter's Write function.
 //
-// Examples:
+// Usage:
 //	// Success
 //	func HandlerFunc(w http.ResponseWriter, r *http.Request) {
 //		gojsend.NewWriter(w).
@@ -74,9 +74,9 @@
 //
 // JSendDecorator
 //
-// Decorates handlers to replace http.ResponseWrtier with JSendWriter
+// Decorates handlers to replace http.ResponseWriter with JSendWriter
 //
-// Examples:
+// Usage:
 //	func HandlerFunc(w gojsend.JSendWriter, r *http.Request) {
 //		w.Success(map[string]interface{}{"foo": "bar"}).
 //			// StatusCode(200).	// Use to overwrite default status code

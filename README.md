@@ -9,7 +9,7 @@ A JSend Builder and Response Writer for Go.
 $ go get -u github.com/zishone/gojsend
 ```
 
-## Examples
+## Usage
 ### JSendBuilder
 The JSend Builder provides a convinient way for building JSend responses.
 
@@ -84,7 +84,7 @@ func HandlerFunc(w http.ResponseWriter, r *http.Request) {
 ```
 
 ### JSendDecorator
-Decorates handlers to replace http.ResponseWrtier with JSendWriter
+Decorates handlers to replace http.ResponseWriter with JSendWriter
 ```go
 func HandlerFunc(w gojsend.JSendWriter, r *http.Request) {
   w.Success(map[string]interface{}{"foo": "bar"}).

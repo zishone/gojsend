@@ -20,7 +20,7 @@ func (j *JSendDecoratorBuffer) JSONEncoder(jsonEncoder JSONEncoder) JSendDecorat
 	return j
 }
 
-// Decorate : decorates the handler to replace http.ResponseWrtier with
+// Decorate : decorates the handler to replace http.ResponseWriter with
 // JSendWriter
 func (j *JSendDecoratorBuffer) Decorate(h JSendHandler) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
